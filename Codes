@@ -1,0 +1,39 @@
+using System;
+
+public class LDAPHelper
+{
+    public static string GetDCAddress(string ldapUrl)
+    {
+        try
+        {
+            // Create a Uri object from the LDAP URL
+            var uri = new Uri(ldapUrl);
+
+            // Extract the host or IP address from the Uri object
+            string dcAddress = uri.Host;
+
+            return dcAddress;
+        }
+        catch (UriFormatException)
+        {
+            // An exception is thrown if the LDAP URL is invalid
+            return string.Empty;
+        }
+    }
+
+    public static void Main()
+    {
+        // Test the GetDCAddress method
+        string ldapUrl = "LDAP://172.29.68.33/dc=thingworx";
+
+        string dcAddress = GetDCAddress(ldapUrl);
+        if (!string.IsNullOrEmpty(dcAddress))
+        {
+            Console.WriteLine($"Domain Controller Address: {dcAddress}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid LDAP URL.");
+        }
+    }
+}
