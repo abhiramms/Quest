@@ -57,3 +57,41 @@ namespace TimeBasedOTPConsoleApp
         }
     }
 }
+
+using System;
+using OtpNet;
+
+namespace TimeBasedOTPConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Replace "YOUR_SECRET_KEY" with your secret key (use a random string)
+            var secretKey = Base32Encoding.ToBytes("YOUR_SECRET_KEY");
+
+            // Calculate the time difference between now and the next 12 AM
+            var now = DateTime.UtcNow;
+            var nextMidnight = now.Date.AddDays(1).AddHours(0).AddMinutes(0).AddSeconds(0);
+            var timeDifference = nextMidnight - now;
+
+            // Convert the time difference to seconds and use it as the time step for TOTP
+            var timeStep = (int)timeDifference.TotalSeconds;
+
+            // Initialize TOTP generator with the calculated time step
+            var totp = new Totp(secretKey, step: timeStep);
+
+            // Generate and display TOTP
+            var otp = totp.ComputeTotp();
+            Console.WriteLine($"Time-based OTP: {otp}");
+
+            // Validate the OTP (optional)
+            Console.Write("Enter the OTP for validation: ");
+            string userInput = Console.ReadLine();
+            bool isValid = totp.VerifyTotp(userInput);
+            Console.WriteLine($"OTP Validation Result: {isValid}");
+        }
+    }
+}
+
+
