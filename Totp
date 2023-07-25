@@ -1,0 +1,27 @@
+using System;
+using OtpNet;
+
+namespace TimeBasedOTPConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Replace "YOUR_SECRET_KEY" with your secret key (use a random string)
+            var secretKey = Base32Encoding.ToBytes("YOUR_SECRET_KEY");
+
+            // Initialize TOTP generator with time step and T0
+            var totp = new Totp(secretKey, step: 30, T0: 0);
+
+            // Generate and display TOTP
+            var otp = totp.ComputeTotp();
+            Console.WriteLine($"Time-based OTP: {otp}");
+
+            // Validate the OTP (optional)
+            Console.Write("Enter the OTP for validation: ");
+            string userInput = Console.ReadLine();
+            bool isValid = totp.VerifyTotp(userInput);
+            Console.WriteLine($"OTP Validation Result: {isValid}");
+        }
+    }
+}
