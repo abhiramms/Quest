@@ -1,3 +1,41 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Enter pattern length: ");
+        int patternLength = int.Parse(Console.ReadLine());
+
+        if (patternLength < 8)
+        {
+            Console.WriteLine("Pattern length must be at least 8 characters.");
+            return;
+        }
+
+        string pattern = GeneratePattern(patternLength);
+        Console.WriteLine("Generated Pattern: " + pattern);
+    }
+
+    static string GeneratePattern(int length)
+    {
+        string pattern = "";
+        int digits = length / 4;
+        int letters = length - digits;
+
+        for (int i = 0; i < digits; i++)
+        {
+            pattern += i % 2 == 0 ? "12" : "34";
+        }
+
+        for (int i = 0; i < letters; i++)
+        {
+            pattern += i % 2 == 0 ? "A" : "B";
+        }
+
+        return pattern;
+    }
+}
 
 using System;
 using System.Text;
