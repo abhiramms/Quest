@@ -1,3 +1,43 @@
+
+using System;
+using System.Text;
+using System.Security.Cryptography;
+
+class Program
+{
+    static void Main()
+    {
+        int otpLength = 8;
+        string pattern = "12Ab34Cd";
+
+        string otp = GeneratePatternOTP(pattern, otpLength);
+        Console.WriteLine("Generated OTP: " + otp);
+    }
+
+    static string GeneratePatternOTP(string pattern, int length)
+    {
+        StringBuilder otpBuilder = new StringBuilder();
+
+        using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+        {
+            int patternLength = pattern.Length;
+
+            for (int i = 0; i < length; i++)
+            {
+                byte[] randomBytes = new byte[1];
+                rng.GetBytes(randomBytes);
+                int randomIndex = randomBytes[0] % patternLength;
+
+                otpBuilder.Append(pattern[randomIndex]);
+            }
+        }
+
+        return otpBuilder.ToString();
+    }
+}
+
+
+
 using System;
 
 public class LDAPHelper
