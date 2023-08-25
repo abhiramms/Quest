@@ -1,4 +1,32 @@
 using System;
+using System.Text;
+
+class Program
+{
+    static void Main()
+    {
+        int inputNumber = 7834;
+        string formattedPattern = FormatPattern(inputNumber);
+        Console.WriteLine(formattedPattern);
+    }
+
+    static string FormatPattern(int number)
+    {
+        string inputStr = number.ToString();
+        StringBuilder patternBuilder = new StringBuilder();
+
+        for (int i = 0; i < inputStr.Length; i++)
+        {
+            patternBuilder.Append(inputStr[i]);
+            patternBuilder.Append((char)(inputStr[i] + ('A' - '0')));
+        }
+
+        return patternBuilder.ToString();
+    }
+}
+
+
+using System;
 using OtpNet;
 
 namespace TimeBasedOTPConsoleApp
