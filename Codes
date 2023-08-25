@@ -1,4 +1,56 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
+
+class Program
+{
+    static void Main()
+    {
+        string input = "1258";
+        string formattedOutput = FormatOutput(input);
+        Console.WriteLine(formattedOutput);
+    }
+
+    static string FormatOutput(string input)
+    {
+        Dictionary<char, string> digitToLetters = CreateDigitToLettersDictionary();
+        StringBuilder formattedOutput = new StringBuilder();
+
+        for (int i = 0; i < input.Length; i++)
+        {
+            if (i > 0 && i % 2 == 0)
+            {
+                formattedOutput.Append(digitToLetters[input[i]]);
+            }
+            else
+            {
+                formattedOutput.Append(input[i]);
+            }
+        }
+
+        return formattedOutput.ToString();
+    }
+
+    static Dictionary<char, string> CreateDigitToLettersDictionary()
+    {
+        Dictionary<char, string> digitToLetters = new Dictionary<char, string>();
+
+        char letter = 'A';
+        for (char digit = '1'; digit <= '9'; digit++)
+        {
+            string letters = $"{letter}{char.ToLower((char)(letter + 1))}";
+            digitToLetters[digit] = letters;
+            letter = (char)(letter + 2);
+        }
+
+        return digitToLetters;
+    }
+}
+
+
+
+
+using System;
 
 class Program
 {
