@@ -1,3 +1,39 @@
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Dictionary<char, string> digitToLetters = CreateDigitToLettersDictionary();
+        
+        foreach (var kvp in digitToLetters)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+        }
+    }
+
+    static Dictionary<char, string> CreateDigitToLettersDictionary()
+    {
+        Dictionary<char, string> digitToLetters = new Dictionary<char, string>();
+
+        char digit = '0';
+        char letter = 'A';
+        while (digit <= '9')
+        {
+            string letters = $"{letter}{(char)(letter + 1)}";
+            digitToLetters[digit] = letters;
+            digit++;
+            letter += 2;
+        }
+
+        return digitToLetters;
+    }
+}
+
+
+
 using System;
 using System.Text;
 
