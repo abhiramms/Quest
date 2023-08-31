@@ -22,6 +22,68 @@ namespace NumberLetterReplacement
                 { 0, 'J' }
             };
 
+            Console.Write("Enter the input: ");
+            string userInput = Console.ReadLine();
+
+            StringBuilder replacedInput = new StringBuilder();
+
+            for (int i = 0; i < userInput.Length; i += 2)
+            {
+                replacedInput.Append(userInput[i]); // Keep the first character of the pair
+
+                if (i + 1 < userInput.Length)
+                {
+                    char currentChar = userInput[i + 1];
+
+                    if (char.IsDigit(currentChar))
+                    {
+                        int digit = int.Parse(currentChar.ToString());
+                        if (numberLetterDictionary.ContainsKey(digit))
+                        {
+                            replacedInput.Append(numberLetterDictionary[digit]);
+                        }
+                    }
+                    else
+                    {
+                        replacedInput.Append(currentChar);
+                    }
+                }
+            }
+
+            string finalReplacedInput = replacedInput.ToString();
+            Console.WriteLine(finalReplacedInput);
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace NumberLetterReplacement
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<int, char> numberLetterDictionary = new Dictionary<int, char>
+            {
+                { 1, 'A' },
+                { 2, 'B' },
+                { 3, 'C' },
+                { 4, 'D' },
+                { 5, 'E' },
+                { 6, 'F' },
+                { 7, 'G' },
+                { 8, 'H' },
+                { 9, 'I' },
+                { 0, 'J' }
+            };
+
             string userInput = "345678701";
 
             StringBuilder replacedInput = new StringBuilder();
