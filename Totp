@@ -2,6 +2,63 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+namespace NumberLetterReplacement
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<int, char> numberLetterDictionary = new Dictionary<int, char>
+            {
+                { 1, 'A' },
+                { 2, 'B' },
+                { 3, 'C' },
+                { 4, 'D' },
+                { 5, 'E' },
+                { 6, 'F' },
+                { 7, 'G' },
+                { 8, 'H' },
+                { 9, 'I' },
+                { 0, 'J' }
+            };
+
+            string userInput = "345678701";
+
+            StringBuilder replacedInput = new StringBuilder();
+            replacedInput.Append(userInput.Substring(0, 2)); // Keep the first two characters as they are
+
+            for (int i = 2; i < userInput.Length; i++)
+            {
+                char currentChar = userInput[i];
+
+                if (char.IsDigit(currentChar))
+                {
+                    int digit = int.Parse(currentChar.ToString());
+                    if (numberLetterDictionary.ContainsKey(digit))
+                    {
+                        replacedInput.Append(numberLetterDictionary[digit]);
+                    }
+                }
+                else
+                {
+                    replacedInput.Append(currentChar);
+                }
+            }
+
+            string finalReplacedInput = replacedInput.ToString();
+            Console.WriteLine(finalReplacedInput);
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 class Program
 {
     static void Main()
