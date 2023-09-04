@@ -42,6 +42,69 @@ namespace ConsoleInputTransformation
                     int num1 = int.Parse(input.Substring(index, 1));
                     int num2 = int.Parse(input.Substring(index + 1, 1));
 
+                    output.Append($"{num1}{num2}{dictionary[num1]}{dictionary[num2]}");
+
+                    index += 2;
+                }
+                else
+                {
+                    output.Append(input.Substring(index));
+                    break;
+                }
+            }
+
+            return output.ToString();
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleInputTransformation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<int, char> numberLetterDictionary = new Dictionary<int, char>
+            {
+                { 1, 'A' },
+                { 2, 'B' },
+                { 3, 'C' },
+                { 4, 'D' },
+                { 5, 'E' },
+                { 6, 'F' },
+                { 7, 'G' },
+                { 8, 'H' },
+                { 9, 'I' },
+                { 0, 'J' }
+            };
+
+            Console.Write("Enter the input string: ");
+            string input = Console.ReadLine();
+
+            string output = TransformInput(input, numberLetterDictionary);
+            Console.WriteLine(output);
+        }
+
+        static string TransformInput(string input, Dictionary<int, char> dictionary)
+        {
+            StringBuilder output = new StringBuilder();
+            int index = 0;
+
+            while (index < input.Length)
+            {
+                if (index + 2 <= input.Length)
+                {
+                    int num1 = int.Parse(input.Substring(index, 1));
+                    int num2 = int.Parse(input.Substring(index + 1, 1));
+
                     output.Append($"{num1}{num2}{dictionary[num1]}{char.ToLower(dictionary[num2])}");
 
                     index += 2;
