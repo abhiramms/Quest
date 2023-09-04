@@ -1,3 +1,84 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleInputTransformation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<int, char> numberLetterDictionary = new Dictionary<int, char>
+            {
+                { 1, 'A' },
+                { 2, 'B' },
+                { 3, 'C' },
+                { 4, 'D' },
+                { 5, 'E' },
+                { 6, 'F' },
+                { 7, 'G' },
+                { 8, 'H' },
+                { 9, 'I' },
+                { 0, 'J' }
+            };
+
+            Console.Write("Enter the input string: ");
+            string input = Console.ReadLine();
+
+            string output = TransformInput(input, numberLetterDictionary);
+            Console.WriteLine(output);
+        }
+
+        static string TransformInput(string input, Dictionary<int, char> dictionary)
+        {
+            StringBuilder output = new StringBuilder();
+            int index = 0;
+
+            while (index < input.Length)
+            {
+                if (index + 1 < input.Length)
+                {
+                    int num1 = int.Parse(input.Substring(index, 1));
+                    int num2 = int.Parse(input.Substring(index + 1, 1));
+
+                    if (dictionary.ContainsKey(num1))
+                    {
+                        output.Append(dictionary[num1]);
+                    }
+                    else
+                    {
+                        output.Append(num1);
+                    }
+
+                    if (dictionary.ContainsKey(num2))
+                    {
+                        output.Append(dictionary[num2]);
+                    }
+                    else
+                    {
+                        output.Append(num2);
+                    }
+
+                    index += 2;
+                }
+                else
+                {
+                    output.Append(input.Substring(index));
+                    break;
+                }
+            }
+
+            return output.ToString();
+        }
+    }
+}
+
+
+
+
+
+
 using System;
 using System.Collections.Generic;
 using System.Text;
