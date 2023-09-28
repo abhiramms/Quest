@@ -1,3 +1,30 @@
+<PasswordBox x:Name="PasswordBox" Width="200">
+    <PasswordBox.Template>
+        <ControlTemplate TargetType="PasswordBox">
+            <Grid>
+                <PasswordBox x:Name="PART_PasswordBox" />
+                <ToggleButton x:Name="ShowPasswordToggle" 
+                              Width="20" Height="20"
+                              Content="👁️">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=PART_PasswordBox, Path=Password.Length, Mode=OneWay}" Value="0">
+                                    <Setter Property="IsChecked" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+            </Grid>
+        </ControlTemplate>
+    </PasswordBox.Template>
+</PasswordBox>
+
+
+
+
+
 using System;
 using System.Text.RegularExpressions;
 
